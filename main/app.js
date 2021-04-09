@@ -5,9 +5,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 
-const indexRouter = require('./routes/home');
-const helloRouter = require('./routes/hello');
-const allRouter = require('./routes/all');
+const indexRouter = require('../app/routes/home');
+const registerRouter = require('../app/routes/auth/register');
 
 const app = express();
 
@@ -19,8 +18,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/hello', helloRouter)
-app.use('/all', allRouter);
+app.use('/all', registerRouter);
 
 //ADMIN_USERS FUNCTIONALITY
 // Provide login for administrator
