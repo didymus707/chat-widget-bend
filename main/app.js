@@ -22,4 +22,18 @@ app.use('/', indexRouter);
 app.use('/hello', helloRouter)
 app.use('/all', allRouter);
 
+//ADMIN_USERS FUNCTIONALITY
+// Provide login for administrator
+// allow users to check chatrooms.
+// allow users to pick a chatroom
+// allow users to see chat messages in the chatroom  - socket.io
+// allow users to reply to chat messages.- socket.io
+
+
+//ANONYMOUS USERS FUNCTIONALITY
+// allow the anonymous user to provide name, email (optional);
+// allow anonymouse user to create chatroom
+// allow anonymouse users to send chat messages. - socket.io
+// provide replies to anonymouse users from admin users. - socket.io
+
 module.exports = app;
