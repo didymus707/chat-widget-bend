@@ -11,6 +11,18 @@ pool.on('connect', () => {
   console.log('connected to the db');
 });
 
+const createChatsTable = () => {
+  const queryText = `
+    CREATE TABLE IF NOT EXISTS
+      chats(
+        cid SERIAL PRIMARY KEY,
+        chat VARCHAR(255) NOT NULL,
+        chatroom_id INT REFERENCES chatrooms(chid),
+        created_at TIMESTAMP NOT NULL DEFAULT now()
+      )
+  `;
+}
+
 const dropTables = () => {
   const queryText = 'SELECT EXISTS (SELECT relname FROM pg_class WHERE relname = chats);'
   pool.query(queryText)
