@@ -1,7 +1,7 @@
 CREATE TABLE chatrooms (
   chid SERIAL PRIMARY KEY,
   user_id INT REFERENCES admin_users(uid),
-  anonymous__id INT REFERENCES anonymous_user(aid)
+  customer_id INT REFERENCES customer(cuid)
 );
 
 CREATE TABLE admin_users (
@@ -12,7 +12,7 @@ CREATE TABLE admin_users (
 );
 CREATE TABLE customer (
   cuid SERIAL PRIMARY KEY,
-  name VARCHAR(255),
+  name VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT Null
 );
 
