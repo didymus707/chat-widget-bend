@@ -10,16 +10,15 @@ CREATE TABLE admin_users (
   email VARCHAR(255) UNIQUE,
   created_at TIMESTAMP NOT NULL DEFAULT now()
 );
+CREATE TABLE customer (
+  cuid SERIAL PRIMARY KEY,
+  name VARCHAR(255),
+  email VARCHAR(255) NOT Null
+);
 
 CREATE TABLE chats (
   cid SERIAL PRIMARY KEY,
-  messages VARCHAR(255) NOT NULL,
+  chat VARCHAR(255) NOT NULL,
   chatroom_id INT REFERENCES chatrooms(chid),
   created_at TIMESTAMP NOT NULL DEFAULT now()
-);
-
-CREATE TABLE anonymous_user (
-  aid SERIAL PRIMARY KEY,
-  name VARCHAR(255),
-  email VARCHAR(255) NOT Null
 );
