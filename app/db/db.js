@@ -89,8 +89,47 @@ const createChatsTable = () => {
   })
 }
 
-const dropTables = () => {
+const dropAdminTables = () => {
   const queryText = 'DROP TABLE IF EXISTS admin_users';
+  pool.query(queryText)
+    .then(res => {
+      console.log(res);
+      pool.end;
+    })
+    .catch(err => {
+      console.log(err);
+      process.exit(0);
+    })
+}
+
+const dropCustomersTables = () => {
+  const queryText = 'DROP TABLE IF EXISTS customers';
+  pool.query(queryText)
+    .then(res => {
+      console.log(res);
+      pool.end;
+    })
+    .catch(err => {
+      console.log(err);
+      process.exit(0);
+    })
+}
+
+const dropChatroomsTables = () => {
+  const queryText = 'DROP TABLE IF EXISTS chatrooms';
+  pool.query(queryText)
+    .then(res => {
+      console.log(res);
+      pool.end;
+    })
+    .catch(err => {
+      console.log(err);
+      process.exit(0);
+    })
+}
+
+const dropChatsTables = () => {
+  const queryText = 'DROP TABLE IF EXISTS chats';
   pool.query(queryText)
     .then(res => {
       console.log(res);
