@@ -50,7 +50,7 @@ const createCustomersTable = () => {
   })
 }
 
-const createChatRoomTable = () => {
+const createChatRoomsTable = () => {
   const queryText = `
     CREATE TABLE IF NOT EXISTS
       chatrooms(
@@ -89,7 +89,7 @@ const createChatsTable = () => {
   })
 }
 
-const dropAdminTables = () => {
+const dropAdminTable = () => {
   const queryText = 'DROP TABLE IF EXISTS admin_users';
   pool.query(queryText)
     .then(res => {
@@ -102,7 +102,7 @@ const dropAdminTables = () => {
     })
 }
 
-const dropCustomersTables = () => {
+const dropCustomersTable = () => {
   const queryText = 'DROP TABLE IF EXISTS customers';
   pool.query(queryText)
     .then(res => {
@@ -115,7 +115,7 @@ const dropCustomersTables = () => {
     })
 }
 
-const dropChatroomsTables = () => {
+const dropChatroomsTable = () => {
   const queryText = 'DROP TABLE IF EXISTS chatrooms';
   pool.query(queryText)
     .then(res => {
@@ -128,7 +128,7 @@ const dropChatroomsTables = () => {
     })
 }
 
-const dropChatsTables = () => {
+const dropChatsTable = () => {
   const queryText = 'DROP TABLE IF EXISTS chats';
   pool.query(queryText)
     .then(res => {
@@ -147,7 +147,14 @@ pool.on('remove', () => {
 });
 
 module.exports = {
-  dropTables
+  createAdminUsersTable,
+  createCustomersTable,
+  createChatRoomsTable,
+  createChatsTable,
+  dropAdminTable,
+  dropCustomersTable,
+  dropChatroomsTable,
+  dropChatsTable
 };
 
 require('make-runnable');
