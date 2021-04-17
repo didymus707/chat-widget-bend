@@ -158,10 +158,10 @@ const dropAllTables = () => {
   dropChatsTable()
 }
 
-pool.on('remove', () => {
-  console.log('client removed');
-  process.exit(0);
-});
+// pool.on('remove', () => {
+//   console.log('client removed');
+//   process.exit(0);
+// });
 
 module.exports = {
   createAdminsTable,
@@ -173,7 +173,8 @@ module.exports = {
   dropCustomersTable,
   dropChatRoomsTable,
   dropChatsTable,
-  dropAllTables
+  dropAllTables,
+  pool
 };
 
 require('make-runnable');

@@ -8,7 +8,7 @@ router.post('/api/post/chat', (req, res, next) => {
   Pool.query(`INSERT INTO chats(messages, chatroom_id, created_at)
               VALUES($1, $2, $3)`, values,
               (q_err, q_res) => {
-                res.json(q_res.rows)
+                res.json(q_res)
                 console.log(q_err)
               }
             )

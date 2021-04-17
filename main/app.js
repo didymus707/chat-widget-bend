@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 
-const indexRouter = require('../app/routes/home');
+const indexRouter = require('../app/routes/users');
 const registerRouter = require('../app/routes/auth/register');
 
 const app = express();
@@ -18,9 +18,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/all', registerRouter);
+app.use('/auth/register', registerRouter);
 
-//ADMIN_USERS FUNCTIONALITY
+//ADMINS FUNCTIONALITY
 // Provide login for administrator
 // allow users to check chatrooms.
 // allow users to pick a chatroom
@@ -28,7 +28,7 @@ app.use('/all', registerRouter);
 // allow users to reply to chat messages.- socket.io
 
 
-//ANONYMOUS USERS FUNCTIONALITY
+//CUSTOMERS FUNCTIONALITY
 // allow the anonymous user to provide name, email (optional);
 // allow anonymouse user to create chatroom
 // allow anonymouse users to send chat messages. - socket.io
