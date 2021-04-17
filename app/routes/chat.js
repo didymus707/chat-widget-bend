@@ -6,7 +6,7 @@ const router = express.Router();
 router.post('/api/post/chat', (req, res, next) => {
   const values = [req.body.messages, req.body.chatroom_id, req.body.created_at];
   Pool.query(`INSERT INTO chats(messages, chatroom_id, created_at)
-              VALUES($1, $2, NOW())`, values,
+              VALUES($1, $2, $3)`, values,
               (q_err, q_res) => {
                 res.json(q_res.rows)
                 console.log(q_err)
