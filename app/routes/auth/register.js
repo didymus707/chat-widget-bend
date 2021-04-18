@@ -4,12 +4,14 @@ const { pool } = require('../../db/db');
 const bcrypt = require('bcrypt');
 const jwtGenerator = require('../../utils/jwtGenerator');
 const validInfo = require('../../middleware/validInfo');
+const authorization = require('../../middleware/authorization');
 
 // Post register
 router.post('/register', validInfo, async (req, res, next) => {
   try {
-    const { name, email, password } = req.body;
-    const user = await pool.query("SELECT * FROM admins WHERE email=$1", [email]);
+    const { email, name, password } = req.body;
+
+    const user = await pool.query("SELECT * FROM admins WHERE email=$1", [ email ]);
     if (user.rows.length !== 0) return res.status(401).send('User already exist!');
     
     const saltRound = 10;
@@ -30,16 +32,13 @@ router.post('/register', validInfo, async (req, res, next) => {
   }
 });
 
-// GET REGISTER
-router.get('/user', (req, res) => {
-  const email = String(req.body.email)
-  Pool.query(`SELECT * FROM admin_users
-              WHERE email = $1`, [ email ], values,
-              (q_err, q_res) => {
-                res.json(q_res.rows)
-                console.log(q_err)
-              }
-            )
-});
+router.get('/is-verified', authorization, async (req, res) => {
+  try {
+    res.json(true);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+})
 
 module.exports = router;

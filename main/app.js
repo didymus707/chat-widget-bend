@@ -5,9 +5,10 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 
-const index = require('../app/routes/users');
 const register = require('../app/routes/auth/register');
 const login = require('../app/routes/auth/login');
+const users = require('../app/routes/users');
+const dashboard = require('../app/routes/dashboard');
 
 const app = express();
 
@@ -18,9 +19,10 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+app.use('/', users);
 app.use('/auth', register);
 app.use('/auth', login);
+app.use('/dashboard', dashboard);
 
 //ADMINS FUNCTIONALITY
 // Provide login for administrator

@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { pool } = require('../db/db');
 
-router.get('/api/users', async (req, res, next) => {
+router.get('/users', async (req, res, next) => {
   try {
     const users = await pool.query(`SELECT * FROM admins`);
     res.json(users.rows);
