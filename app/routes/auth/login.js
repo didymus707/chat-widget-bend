@@ -4,68 +4,11 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const { pool } = require('../../db/db');
 const jwtGenerator = require('../../utils/jwtGenerator');
+const validInfo = require('../../middleware/validInfo');
 
 require('dotenv').config();
 
-// const validaiteAuthToken = (req, res, next) => {
-//   const authHeader = req.header("Authorization");
-//   console.log(authHeader);
-//   if (!authHeader) {
-//     next(createErr("Needs login", 4002));
-//     return;
-//   }
-//   const authToken = authHeader.split(" ")[1];
-//   jwt.verify(
-//     authToken,
-//     process.env.JWT_ACCESS_TOKEN_SECRET,
-//     { algorithms: ["HS256"] },
-//     (err, user) => {
-//       if (!err) {
-//         next(err);
-//         return;
-//       }
-//       next();
-//     }
-//   );
-// };
-
-// router
-//   .route("/")
-//   .options()
-//   .post(validateUserDetails, async (req, res, next) => {
-//     // extract the userdata from request object.
-//     const { userName, password } = req.body;
-//     //validate with users object.
-//     const user = users.find(
-//       (user) =>
-//         (user.userName === userName || user.email === userName) &&
-//         user.password === password
-//     );
-
-//     // respond with proper handler
-//     if (!user) {
-//       next(createErr("Invalid login, please try again"));
-//       return;
-//     }
-//     const token = await jwt.sign(
-//       { user: user.userName },
-//       process.env.JWT_ACCESS_TOKEN_SECRET,
-//       { algorithm: "HS256", expiresIn: "20mins" }
-//     );
-//     res.json({
-//       status: "Login successfull",
-//       user: {
-//         name: user.name,
-//         email: user.email
-//       },
-//       accessToken: token
-//     });
-//   });
-
-// const loginModule = (module.exports = router);
-// loginModule.validateAuthToken = validateAuthToken;
-
-router.post('/', async (req, res) => {
+router.post('/login', validInfo, async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await pool.query("SELECT * FROM admins WHERE email = $1", [ email ]);

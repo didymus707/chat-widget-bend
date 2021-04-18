@@ -3,9 +3,10 @@ const router = express.Router();
 const { pool } = require('../../db/db');
 const bcrypt = require('bcrypt');
 const jwtGenerator = require('../../utils/jwtGenerator');
+const validInfo = require('../../middleware/validInfo');
 
 // Post register
-router.post('/', async (req, res, next) => {
+router.post('/register', validInfo, async (req, res, next) => {
   try {
     const { name, email, password } = req.body;
     const user = await pool.query("SELECT * FROM admins WHERE email=$1", [email]);
@@ -30,7 +31,7 @@ router.post('/', async (req, res, next) => {
 });
 
 // GET REGISTER
-router.get('/api/get/register', (req, res, next) => {
+router.get('/user', (req, res) => {
   const email = String(req.body.email)
   Pool.query(`SELECT * FROM admin_users
               WHERE email = $1`, [ email ], values,

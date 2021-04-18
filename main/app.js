@@ -19,8 +19,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/auth/register', register);
-app.use('/auth/login', login);
+app.use('/auth', register);
+app.use('/auth', login);
 
 //ADMINS FUNCTIONALITY
 // Provide login for administrator
