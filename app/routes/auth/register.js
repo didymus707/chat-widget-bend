@@ -7,12 +7,12 @@ const validInfo = require('../../middleware/validInfo');
 const authorization = require('../../middleware/authorization');
 
 // Post register
-router.post('/register', validInfo, async (req, res, next) => {
+router.post('/register', validInfo, async (req, res) => {
   try {
-    const { email, name, password } = req.body;
+    const { name, email, password } = req.body;
 
     const user = await pool.query("SELECT * FROM admins WHERE email=$1", [ email ]);
-    if (user.rows.length !== 0) return res.status(401).send('User already exist!');
+    if (user.rows.length !== 0) return res.json('User already exist!');
     
     const saltRound = 10;
     const salt = await bcrypt.genSalt(saltRound);
